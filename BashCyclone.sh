@@ -1,5 +1,5 @@
 #!/bin/bash
-#test
+#Just Testing out Git!
 # Define variables
 LSB=/usr/bin/lsb_release
 
