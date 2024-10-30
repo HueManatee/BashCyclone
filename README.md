@@ -1,6 +1,10 @@
 # BashCyclone
 A Bash script with a variety of Linux commands usable through a basic UI
 
+Much credit goes to Raymond Albert for the framework for this code, Selvan Snow for assigning it in his Operating Systems class and Keegan Concannon for a few ideas on what to add.
+
+# Intro
+
 What started as AdminScriptStarter that was made for an assignment for my Operating Systems class at Assumption University is now BashCyclone!
 
 The first 11 menus in the script were made for the assignment but I wanted to add more options and make the shell script do more things.
@@ -14,7 +18,7 @@ Then they'll be a force to be reckoned with! Almost like a cyclone..._a BashCylo
 
 
 
-Some Useful Ideas to Implement:
+# Some Useful Ideas to Implement:
 
 Add root user to system [add this to Users Operations]
 
@@ -37,7 +41,7 @@ Self-Destruct option [okay maybe not, but maybe who knows, probably just rm -rf 
 
 
 
-Instructions for Download and Use:
+# Instructions for Download and Use:
 
 Step 1:
 
