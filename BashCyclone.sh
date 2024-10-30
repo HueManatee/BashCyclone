@@ -29,6 +29,7 @@ echo "9. Process Usage"
 echo "10. Users Operations"
 echo "11. File Operations"
 echo "12. Port Info"
+echo "98. Shutdown"
 echo "99. Exit"
 }
 
@@ -174,7 +175,7 @@ echo "1.  Show all processes" | center
 echo "2.  Kill a process" | center
 echo "3.  Bring up top" | center 
 echo "4.  ${txtpur}Return to Main Menu${txtrst}" | center
-echo "5.  ${txtred}Shut down${txtrst}" | center
+echo "5.  ${txtred}Exit Program${txtrst}" | center
 echo ""
 
 read processmenuchoice
@@ -198,10 +199,10 @@ case $processmenuchoice in
 
 4 )
 	clear && echo "" && echo "Are you sure you want to return to the main menu? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
-	read exitays
-	case $exitays in
+	read returnays
+	case $returnays in
 		y | Y )
-			clear && exit
+			clear && return
 		;;
 		n | N )
 			clear && echo "" && echo "Okay. Nevermind then." | center && echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | center && read
@@ -212,11 +213,11 @@ case $processmenuchoice in
 ;;
 
 5 )
-	clear && echo "" && echo "Are you sure you want to shut down? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
-	read shutdownays
-	case $shutdownays in
+	clear && echo "" && echo "Are you sure you want to exit? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
+	read exitays
+	case $exitays in
 		y | Y )
-			shutdown
+			clear && exit
 		;;
 		n | N )
 			clear && echo "" && echo "Okay. Nevermind then." | center && echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | center && read
@@ -281,7 +282,7 @@ echo "3.  Create a group" | center
 echo "4.  Delete a user" | center
 echo "5.  Change a password" | center
 echo "6.  ${txtpur}Return to Main Menu${txtrst}" | center
-echo "7.  ${txtred}Shut down${txtrst}" | center
+echo "7.  ${txtred}Exit Program${txtrst}" | center
 echo ""
 
 read usermenuchoice
@@ -354,10 +355,10 @@ case $usermenuchoice in
 
 6 )
 	clear && echo "" && echo "Are you sure you want to return to the main menu? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
-	read exitays
-	case $exitays in
+	read returnays
+	case $returnays in
 		y | Y )
-			clear && exit
+			clear && return
 		;;
 		n | N )
 			clear && echo "" && echo "Okay. Nevermind then." | center && echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | center && read
@@ -369,11 +370,11 @@ case $usermenuchoice in
 ;;
 
 7 )
-	clear && echo "" && echo "Are you sure you want to shut down? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
-	read shutdownays
-	case $shutdownays in
+	clear && echo "" && echo "Are you sure you want to exit? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
+	read exitays
+	case $exitays in
 		y | Y )
-			clear && shutdown
+			clear && exit
 		;;
 		n | N )
 			clear && echo "" && echo "Okay. Nevermind then." | center && echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | center && read
@@ -442,7 +443,7 @@ echo "8.  Modify text within a file" | center
 echo "9.  Compress a file" | center
 echo "10. Decompress a file" | center
 echo "11. ${txtpur}Return to main menu${txtrst}" | center
-echo "12. ${txtred}Shut down${txtrst}" | center
+echo "12. ${txtred}Exit Program${txtrst}" | center
 echo ""
 
 read mainmenuchoice
@@ -622,10 +623,10 @@ case $mainmenuchoice in
 
 11 )
 	clear && echo "" && echo "Are you sure you want to return to the main menu? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
-	read exitays
-	case $exitays in
+	read returnays
+	case $returnays in
 		y | Y )
-			clear && exit
+			clear && return
 		;;
 		n | N )
 			clear && echo "" && echo "Okay. Nevermind then." | center && echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | center && read
@@ -636,11 +637,11 @@ case $mainmenuchoice in
 ;;
 
 12 )
-	clear && echo "" && echo "Are you sure you want to shut down? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
-	read shutdownays
-	case $shutdownays in
+	clear && echo "" && echo "Are you sure you want to exit? ${txtcyn}y/n${txtrst}" | centerwide && echo ""
+	read exitays
+	case $exitays in
 		y | Y )
-			clear && shutdown -h now
+			clear && exit
 		;;
 		n | N )
 			clear && echo "" && echo "Okay. Nevermind then." | center && echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | center && read
@@ -707,12 +708,34 @@ esac
 }
 
 
+function shutdown_prompt(){
+
+clear && echo "" && echo "Are you sure you want to shut down? ${txtcyn}y/n${txtrst}"
+	read shutdownays
+	case $shutdownays in
+		y | Y )
+			clear && shutdown -h now
+		;;
+		n | N )
+			clear && echo "" && echo "Okay. Nevermind then." | echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | read
+		;;
+		* )
+			clear && echo "" && echo "${txtred}Please make a valid selection.${txtrst}" | echo "" && echo "${txtcyn}(Press ENTER to continue.)${txtrst}" | read
+		;;
+		
+	esac
+
+
+}
+
+
+
 
 
 # Purpose - Get input via the keyboard and make a decision using case..esac 
 function read_input(){
 local c
-read -p "Enter your choice [ 1 - 12, 99 ] " c
+read -p "Enter your choice [ 1 - 12, 98 - 99 ] " c
 case $c in
 1) os_info ;;
 2) host_info ;;
@@ -727,6 +750,7 @@ case $c in
 11) file_info ;;
 12) port_info ;;
 13) service_info ;;
+98) shutdown_prompt ;;
 99) echo "Bye!"; exit 0 ;;
 *) 
 echo "Please select a valid choice."
