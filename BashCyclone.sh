@@ -1,5 +1,5 @@
 #!/bin/bash
-#Just Testing out Git!
+
 # Define variables
 LSB=/usr/bin/lsb_release
 
@@ -116,7 +116,7 @@ cmd='curl -s'
 write_header " Public IP information "
 ipservice=checkip.dyndns.org
 pipecmd=(sed -e 's/.*Current IP Address: //' -e 's/<.*$//') #using brackets to use it as an array and avoid need of scaping
-$cmd "$inservice" | "${pipecmd[@]}"
+$cmd "$ipservice" | "${pipecmd[@]}"
 pause
 }
 
@@ -396,7 +396,7 @@ pause
 
 #Purpose  - For File Opertios
 function file_info() {
-write_header "File OPerations"
+write_header "File Operations"
 txtred=$(tput setaf 1)
 txtgrn=$(tput setaf 2)
 txtylw=$(tput setaf 3)
@@ -603,7 +603,7 @@ case $mainmenuchoice in
 	read depressfile
 	case $depressfile in
 		*.gz | *.GZ )
-			gunzip $depressfiles && echo "${txtgrn}File decompressed successfully.${txtrst}" | center || echo "${txtred}File failed to decompress.${txtrst}" | center
+			gunzip $depressfile && echo "${txtgrn}File decompressed successfully.${txtrst}" | center || echo "${txtred}File failed to decompress.${txtrst}" | center
 		;;
 
 		*.bz2 | *.BZ2 )
@@ -689,7 +689,11 @@ case $portmenuchoice in
 	pause
 ;;
 2 )
-	echo "Lolz"
+	echo "Please enter the ${txtcyn}Port Number${txtrst} that you want to open: "
+	echo "${txtcyn}(port numbers go from 1-65535)${txtrst}"
+	read portNumber
+	echo ""
+	
 
 ;;
 9 )
