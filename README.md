@@ -74,3 +74,7 @@ Step 5 (or to run from now on):
 Run BashCyclone.sh as root in the directory you placed it in.
 
 bash BashCyclone.sh
+
+Step 6:
+
+Have fun!
